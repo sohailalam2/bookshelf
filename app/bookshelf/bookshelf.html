@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-12"><h1 class="text-danger">My Bookshelf</h1></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" ng-if="successMessage" ng-bind="successMessage"></div>
+                <div class="alert alert-danger" ng-if="errorMessage" ng-bind="errorMessage"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-primary">Create a new shelf</h3>
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="maxBooks">Max Books</label>
+                        <input type="text" class="form-control" id="maxBooks" ng-model="maxBooks">
+                    </div>
+                    <button class="btn btn-danger" ng-click="createShelf()">Create</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h3 class="text-info" ng-if="allShelves.length > 0">Book Shelves</h3>
+                <hr/>
+
+                <form class="form-inline" ng-repeat="shelfId in allShelves">
+                    <h4 class="text-info">Book Shelf -
+                        <small>ID : <code>{{shelfId}}</code></small>
+                    </h4>
+                    <hr/>
+
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" ng-model="book.title">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" class="form-control" id="author" ng-model="book.author">
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" ng-model="book.isbn">
+                    </div>
+                    <button class="btn btn-success" ng-click="addBook(shelfId, book)">Add Book</button>
+
+                    <hr/>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>Title</td>
+                                <td>Author</td>
+                                <td>ISBN</td>
+                                <td>Delete</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="myBook in allBooks[shelfId]">
+                                <td>{{myBook.title}}</td>
+                                <td>{{myBook.author}}</td>
+                                <td>{{myBook.isbn}}</td>
+                                <td>
+                                    <button class="btn btn-danger" ng-click="removeBook(shelfId, myBook.isbn)"> X
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
